@@ -17,7 +17,7 @@ define nagios::check::systemd (
 
   nagios::service { "check_systemd_${title}_${::nagios::client::host_name}":
     ensure                   => $ensure,
-    check_command            => "check_nrpe_systemctl_${title}",
+    check_command            => "check_systemd_service!${args}",
     service_description      => "systemctl_${title}",
     servicegroups            => $servicegroups,
     check_period             => $check_period,
