@@ -9,15 +9,6 @@ define nagios::check::systemd (
   $use                      = $::nagios::client::service_use,
 ) {
 
-  # Service specific script, taken from:
-  file { "${nagios::client::plugin_dir}/check_systemd":
-    ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => template("${module_name}/plugins/check_systemd"),
-  }
-
   nagios::client::nrpe_file { "check_systemd_${title}":
     ensure => $ensure,
     plugin => 'check_systemd',

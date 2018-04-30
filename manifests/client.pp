@@ -225,4 +225,14 @@ class nagios::client (
     ensure  => 'present',
   }
 
+  # Extra scripts created by US
+  # Service specific script, taken from:
+  file { "${nagios::client::plugin_dir}/check_systemd":
+    ensure  => $ensure,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => template("${module_name}/plugins/check_systemd"),
+  }
+
 }
