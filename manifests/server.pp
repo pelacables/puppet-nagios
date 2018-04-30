@@ -939,7 +939,7 @@ class nagios::server (
     command_line => "${nrpe} -c check_sentinel_master_health",
   }
   nagios_command { 'check_systemd_service':
-    command_line => "${nrpe} -c check_systemd_service",
+    command_line => "${nrpe} -c check_systemd_service -a \$ARG1\$",
   }
   nagios_command { 'check_nrpe_hpsa':
     command_line => "${nrpe} -c check_hpsa",

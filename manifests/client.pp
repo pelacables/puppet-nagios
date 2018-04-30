@@ -235,4 +235,10 @@ class nagios::client (
     content => template("${module_name}/plugins/check_systemd"),
   }
 
+  nagios::client::nrpe_file { "check_systemd_service":
+    ensure => present,
+    args   => '$ARG1$',
+    plugin => 'check_systemd',
+  }
+
 }

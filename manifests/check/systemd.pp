@@ -9,16 +9,12 @@ define nagios::check::systemd (
   $use                      = $::nagios::client::service_use,
 ) {
 
-  nagios::client::nrpe_file { "check_systemd_${title}":
-    ensure => $ensure,
-    plugin => 'check_systemd',
-    args   => $args,
-  }
+
 
   nagios::service { "check_systemd_${title}_${::nagios::client::host_name}":
     ensure                   => $ensure,
     check_command            => "check_systemd_service!${args}",
-    service_description      => "systemctl_${title}",
+    service_description      => "{$title}_systemctl",
     servicegroups            => $servicegroups,
     check_period             => $check_period,
     contact_groups           => $contact_groups,
