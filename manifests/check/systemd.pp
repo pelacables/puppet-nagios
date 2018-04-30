@@ -1,5 +1,6 @@
 define nagios::check::systemd (
   $ensure                   = getvar('::nagios_check_systemctl_ensure'),
+  $args                     = $name,
   $check_period             = $::nagios::client::service_check_period,
   $contact_groups           = $::nagios::client::service_contact_groups,
   $first_notification_delay = $::nagios::client::service_first_notification_delay,
@@ -20,6 +21,7 @@ define nagios::check::systemd (
   nagios::client::nrpe_file { "check_systemd_${title}":
     ensure => $ensure,
     plugin => 'check_systemd',
+    args   => $args,
   }
 
   nagios::service { "check_systemd_${title}_${::nagios::client::host_name}":
